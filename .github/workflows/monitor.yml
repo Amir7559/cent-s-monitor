@@ -1,0 +1,49 @@
+
+name: CEnT CASA Monitor
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y g++ libcurl4-openssl-dev pkg-config
+
+      - name: Compile monitor
+        run: |
+          g++ -std=c++17 monitor.cpp -o monitor $(pkg-config --cflags --libs libcurl)
+
+      - name: Run monitor
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+        run: ./monitor
+
+      - name: Save monitoring state
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          for f in availability_state.txt monitor_status.txt telegram_update_id.txt; do
+            if [ -f "$f" ]; then
+              git add "$f"
+            fi
+          done
+
+          if ! git diff --cached --quiet; then
+            git commit -m "Update monitor state"
+            git push
+          fi
