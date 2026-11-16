@@ -3,7 +3,7 @@ name: CEnT CASA Monitor
 
 on:
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "3/5 * * * *"
   workflow_dispatch:
 
 permissions:
