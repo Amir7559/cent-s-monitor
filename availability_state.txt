@@ -1,5 +1,6 @@
 Politecnico di Milano|17/12/2026|FULL
 Politecnico di Milano|26/11/2026|FULL
+Sapienza Università di Roma|12/01/2027|FULL
 Sapienza Università di Roma|17/12/2026|FULL
 Sapienza Università di Roma|26/11/2026|FULL
 Università Ca' Foscari Venezia|26/11/2026|FULL
