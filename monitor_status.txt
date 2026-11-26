@@ -1,4 +1,4 @@
 lastScanOK=1
 lastTotalEntries=2
 lastAvailable=0
-lastCheckTime=26/11/2026 10:35:52 UTC
+lastCheckTime=26/11/2026 10:40:59 UTC
